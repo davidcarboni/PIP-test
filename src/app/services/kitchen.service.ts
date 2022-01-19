@@ -159,12 +159,14 @@ export class KitchenService {
     this.setStorage();
     return of(this.foodDetails);
   }
+  
   private getStorage() {
     if ('foodDetails' in localStorage) {
       this.foodDetails = JSON.parse(localStorage.getItem('foodDetails')!);
     }
   }
   private setStorage() {
+    localStorage.clear();
     localStorage.setItem('foodDetails', JSON.stringify(this.foodDetails));
   }
 }
