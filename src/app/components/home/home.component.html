@@ -1,0 +1,59 @@
+<div class="banner">
+  <div class="content">
+    <h1 class="mb-5">
+      Fresh Cooked Food <br />
+      At Your Door.
+    </h1>
+    <a routerLink="menu">ORDER NOW <i class="bi bi-arrow-right"></i></a>
+  </div>
+</div>
+<div class="mt-5 mb-5">
+  <h1 class="text-center">
+    How does it Work ?
+    <span><h6>3 easy steps to your meal</h6></span>
+  </h1>
+
+  <div class="row mt-5">
+    <div class="col-lg-4 mt-2">
+      <div class="stepBox">
+        <p>Select food <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mt-2">
+      <div class="stepBox">
+        <p>
+          Fill the details <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-4 mt-2">
+      <div class="stepBox">
+        <p>
+          Your order will be delivered
+          <i class="fa fa-motorcycle" aria-hidden="true"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4 mb-4">
+  <h1 class="text-center">We <span class="highlight">Cook</span></h1>
+  <i
+    class="fa fa-spinner fa-spin spinner"
+    *ngIf="specilityLoading$ | async"
+    style="font-size: 24px"
+  ></i>
+  <div class="row">
+    <div
+      class="col-lg-3 mt-3"
+      *ngFor="let fd of specility$ | async; index as i"
+    >
+      <div class="foodbox" *ngIf="i <= 3" routerLink="menu">
+        <img src="{{ fd.image }}" />
+        <h1>{{ fd.name }}</h1>
+      </div>
+    </div>
+  </div>
+</div>

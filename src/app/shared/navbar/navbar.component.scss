@@ -1,0 +1,21 @@
+.navbar-light .navbar-nav .nav-link {
+  color: var(--secondary-color);
+}
+.navbar-light .navbar-nav .nav-link.active-link {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+.cart {
+  font-size: 32px;
+  color: green;
+}
+.cart-counter {
+  position: absolute;
+  text-align: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: green;
+  font-size: 1rem;
+  width: 20px;
+  height: 20px;
+}

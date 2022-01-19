@@ -1,0 +1,153 @@
+<div class="container px-3 my-5 clearfix">
+  <i
+    class="fa fa-spinner fa-spin spinner"
+    *ngIf="cartMenusLoading$ | async"
+    style="font-size: 24px"
+  ></i>
+  <div *ngIf="!(cartMenusLoading$ | async)">
+    <div class="card" *ngIf="cartMenus$ | async; else emptyCart">
+      <div class="card-header">
+        <h2>Food Cart</h2>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered m-0">
+            <thead>
+              <tr>
+                <th class="text-center py-3 px-4" style="min-width: 400px">
+                  Order Details
+                </th>
+                <th class="text-right py-3 px-4" style="width: 100px">Price</th>
+                <th class="text-center py-3 px-4" style="width: 120px">
+                  Quantity
+                </th>
+                <th class="text-right py-3 px-4" style="width: 100px">Total</th>
+                <th
+                  class="text-center align-middle py-3 px-0"
+                  style="width: 40px"
+                >
+                  <a
+                    href="#"
+                    class="shop-tooltip float-none text-light"
+                    title=""
+                    data-original-title="Clear cart"
+                    ><i class="ino ion-md-trash"></i
+                  ></a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let menu of cartMenus$ | async">
+                <td class="p-4">
+                  <div class="media align-items-center">
+                    <img
+                      src="{{ menu.foodImg }}"
+                      class="d-block ui-w-40 ui-bordered mr-4"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <a href="#" class="d-block text-dark">{{
+                        menu.foodName
+                      }}</a>
+                      <small>
+                        <span class="text-muted">Size: </span> EU 37 &nbsp;
+                      </small>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-right font-weight-semibold align-middle p-4">
+                  {{ menu.foodPrice | currency: "GBP" }}
+                </td>
+                <td class="align-middle p-4 flex">
+                  <button
+                    class="btn btn-primary"
+                    (click)="add(menu.id, menu.quantity)"
+                  >
+                    <i class="fa fa-plus"></i>
+                  </button>
+
+                  <input
+                    type="text"
+                    class="quantityBox"
+                    value="{{ menu.quantity }}"
+                  />
+
+                  <button
+                    [disabled]="menu.quantity === 0"
+                    class="btn btn-primary"
+                    (click)="remove(menu.id, menu.quantity)"
+                  >
+                    <i class="fa fa-minus"></i>
+                  </button>
+                </td>
+                <td class="text-right font-weight-semibold align-middle p-4">
+                  {{ menu.foodPrice * menu.quantity | currency: "GBP" }}
+                </td>
+                <td class="text-center align-middle px-0">
+                  <i
+                    class="fa fa-trash"
+                    aria-hidden="true"
+                    (click)="removeOrder(menu.id)"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center pb-4"
+        >
+          <div class="d-flex">
+            <div class="text-right mt-4">
+              <label class="text-muted font-weight-normal m-0"
+                >Total price</label
+              >
+              <div class="text-large">
+                <strong>{{ total$ | async | currency: "GBP" }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-right">
+          <button type="button" class="btn btn-secondary" routerLink="../menu">
+            Back to menus
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary mg-left"
+            routerLink="../checkout"
+          >
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #emptyCart>
+      <div class="card">
+        <div class="card-header">
+          <h5>Food Cart</h5>
+        </div>
+        <div class="card-body cart">
+          <div class="col-sm-12 empty-cart-cls text-center">
+            <img
+              src="https://i.imgur.com/dCdflKN.png"
+              width="130"
+              height="130"
+              class="img-fluid mb-4 mr-3"
+            />
+            <h3><strong>Your Food Cart is Empty</strong></h3>
+            <h4>Add something to make me happy :)</h4>
+            <a
+              href="#"
+              class="btn btn-primary cart-btn-transform m-3"
+              routerLink="../menu"
+              data-abc="true"
+              >Choose Food</a
+            >
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

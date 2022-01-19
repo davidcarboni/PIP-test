@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~font-awesome/css/font-awesome.min.css";
+
+.container {
+  min-height: 80vh;
+}
+.quantityBox {
+  padding-top: 0px;
+  max-width: 50px;
+  text-align: center;
+}
+.mg-left {
+  margin-left: 10px;
+}
+.spinner {
+  position: fixed;
+  z-index: 1031;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

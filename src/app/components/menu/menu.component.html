@@ -1,0 +1,60 @@
+<div class="container mt-5 mb-5">
+  <i
+    class="fa fa-spinner fa-spin spinner"
+    *ngIf="menusLoading$ | async"
+    style="font-size: 24px"
+  ></i>
+
+  <div class="row" *ngIf="!(menusLoading$ | async)">
+    <div
+      class="col-lg-4"
+      *ngFor="let menu of menus$ | async | slice: 0:(more ? undefined : 6)"
+    >
+      <div class="foodbox mt-3 mb-3 shadow-lg p-3 mb-5 bg-white rounded">
+        <img src="{{ menu.foodImg }}" />
+        <h1>{{ menu.foodName }}</h1>
+        <p>{{ menu.foodDetails }}</p>
+        <p>{{ menu.foodPrice | currency: "GBP" }}</p>
+        <br />
+        <a
+          id="add{{ menu.id }}"
+          class="buybtn btn"
+          (click)="add(menu.id, menu.quantity)"
+          *ngIf="menu.quantity === 0 || menu.quantity < 0"
+          >+ Add &nbsp;</a
+        >
+        <div *ngIf="menu.quantity > 0">
+          <div class="form-check-inline">
+            <button
+              id="add-btn-{{ menu.id }}"
+              class="btn btn-primary"
+              (click)="add(menu.id, menu.quantity)"
+            >
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <div class="form-check-inline">
+            <input
+              type="text"
+              id="quantity-input-{{ menu.id }}"
+              class="form-control quantityBox"
+              value="{{ menu.quantity }}"
+            />
+          </div>
+          <div class="form-check-inline">
+            <button
+              class="btn btn-primary"
+              id="remove-btn-{{ menu.id }}"
+              (click)="remove(menu.id, menu.quantity)"
+            >
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="button btn" (click)="more = !more">
+      {{ more ? "Less" : "More" }}
+    </button>
+  </div>
+</div>
